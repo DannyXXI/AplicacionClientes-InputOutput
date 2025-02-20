@@ -1,4 +1,4 @@
-<app-formulario-cliente></app-formulario-cliente>
+<app-formulario-cliente (mandarCliente)="recibirCliente($event)"></app-formulario-cliente>
 <br>
 <table class="table table-striped text-center">
     <thead class="table-dark">
@@ -12,8 +12,26 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td colspan="6">Aun no hay información...</td>
-        </tr>
+        @if (listaClientes.length == 0) { <!-- comporbamos que la lista este vacia -->
+            <tr>
+                <td colspan="6">Aun no hay información...</td>
+            </tr>
+        }
+        @else {
+            @for (cliente of listaClientes; track $index){ <!-- recorremos la lista para mostrarla en la tabla -->
+                <tr>
+                    <td class="align-middle">{{cliente.id}}</td>
+                    <td class="align-middle">{{cliente.nombre}}</td>
+                    <td class="align-middle">{{cliente.cif}}</td>
+                    <td class="align-middle">{{cliente.direccion}}</td>
+                    <td class="align-middle">{{cliente.grupo}}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning">Editar&nbsp;&nbsp;<i class="bi bi-pencil-square"></i></button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger">Borrar&nbsp;&nbsp;<i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

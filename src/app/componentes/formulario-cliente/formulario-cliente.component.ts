@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Cliente } from '../../modelos/Cliente';
 
@@ -21,6 +21,8 @@ export class FormularioClienteComponent {
   public cliente:Cliente | null;  // variable que almacenará los datos del formulario como un objeto Cliente
 
   public contadorID:number;  // variable que asignara cada ID al cliente
+
+  @Output() mandarCliente:EventEmitter<Cliente> = new EventEmitter<Cliente>;  // evento emisor para mandar el cliente al listado (padre)
 
   // metodo constructor
   constructor() {
@@ -48,6 +50,7 @@ export class FormularioClienteComponent {
     else{
       this.cliente = new Cliente( this.contadorID , this.nombre.value.trim() , this.cif.value.trim() , this.direccion.value.trim() , this.grupo.value.trim() );  // creo un objeto Cliente
       this.contadorID++; // incremento el contador de IDs
+      this.mandarCliente.emit(this.cliente); // emitimos el evento con el cliente seleccionado
       this.cliente=null; // restablecemos la variable cliente como null
       this.formulario.setValue({id:-1, nombre: "", cif: "", direccion: "", grupo: ""}); // reiniciamos los valores del formulario (con reset da error con el trim)
     }
