@@ -1,6 +1,6 @@
 <h2 class="fs-1 fw-bold text-uppercase">Alta del cliente</h2>
 
-<form [formGroup]="formulario">
+<form [formGroup]="formulario" (submit)="enviarFormulario($event)">
     <div class="input-group mb-3">
         <label class="input-group-text" for="nombre">Nombre</label>
         <input type="text" class="form-control" id="nombre" placeholder="Nombre del cliente..." formControlName="nombre"/>
