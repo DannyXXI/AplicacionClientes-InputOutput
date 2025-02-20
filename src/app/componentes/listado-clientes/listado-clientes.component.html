@@ -26,9 +26,9 @@
                     <td class="align-middle">{{cliente.direccion}}</td>
                     <td class="align-middle">{{cliente.grupo}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">Editar&nbsp;&nbsp;<i class="bi bi-pencil-square"></i></button>
+                        <button type="button" class="btn btn-warning" [disabled]="botonesDeshabilitados" (click)="editarCliente(cliente.id)">Editar&nbsp;&nbsp;<i class="bi bi-pencil-square"></i></button>
                         &nbsp;&nbsp;
-                        <button type="button" class="btn btn-danger">Borrar&nbsp;&nbsp;<i class="bi bi-trash"></i></button>
+                        <button type="button" class="btn btn-danger" [disabled]="botonesDeshabilitados">Borrar&nbsp;&nbsp;<i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             }
