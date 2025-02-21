@@ -49,15 +49,20 @@ export class FormularioClienteComponent {
 
   // metodo para enviar los datos del cliente
   public enviarFormulario(event: Event):void{
-
     // si no estan rellenados los campos no se envia el formulario y salta un mensaje de aviso
     if(this.nombre.value.trim() == "" || this.cif.value.trim() == ""  || this.direccion.value.trim() == "" || this.grupo.value.trim() == ""){
       alert("Rellene todos los campos para enviar el formulario.");
       event.preventDefault();
     }
     else{
-      this.cliente = new Cliente( this.contadorID , this.nombre.value.trim() , this.cif.value.trim() , this.direccion.value.trim() , this.grupo.value.trim() );  // creo un objeto Cliente
-      this.contadorID++; // incremento el contador de IDs
+      // mando un tipo de cliente en funcion del campo id (-1 para los nuevos y el suyo propio para los modificados)
+      if(this.id.value == -1){
+        this.cliente = new Cliente( this.contadorID , this.nombre.value.trim() , this.cif.value.trim() , this.direccion.value.trim() , this.grupo.value.trim() );  // creo un Cliente con los datos nuevos
+        this.contadorID++; // incremento el contador de IDs
+      }
+      else{
+        this.cliente = new Cliente( this.id.value , this.nombre.value.trim() , this.cif.value.trim() , this.direccion.value.trim() , this.grupo.value.trim() );  // creo un Cliente con los datos modficados
+      }
       this.mandarCliente.emit(this.cliente); // emitimos el evento con el cliente seleccionado
       this.cliente=null; // restablecemos la variable cliente como null
       this.formulario.setValue({id:-1, nombre: "", cif: "", direccion: "", grupo: ""}); // reiniciamos los valores del formulario (con reset da error con el trim)

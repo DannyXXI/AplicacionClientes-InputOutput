@@ -25,7 +25,22 @@ export class ListadoClientesComponent {
 
   // metodo para recibir el cliente del formulario (hijo)
   public recibirCliente(e:Cliente):void {
-    this.listaClientes.push(e);
+
+    let clienteExistente = this.listaClientes.find(cliente => cliente.id === e.id);
+    
+    if (clienteExistente) {
+      // si el cliente existe, actualiazo sus datos
+      clienteExistente.nombre = e.nombre;
+      clienteExistente.cif = e.cif;
+      clienteExistente.direccion = e.direccion;
+      clienteExistente.grupo = e.grupo;
+
+      //limpio la variable del cliente a editar y habilito los botones
+      this.clienteAEditar = undefined;
+      this.botonesDeshabilitados = false;
+    } else {
+      this.listaClientes.push(e);  // si el cliente no existe, le añado a la lista
+    }
   }
 
   // metodo para mandar el cliente a editar al formulario
