@@ -28,7 +28,7 @@
                     <td>
                         <button type="button" class="btn btn-warning" [disabled]="botonesDeshabilitados" (click)="editarCliente(cliente.id)">Editar&nbsp;&nbsp;<i class="bi bi-pencil-square"></i></button>
                         &nbsp;&nbsp;
-                        <button type="button" class="btn btn-danger" [disabled]="botonesDeshabilitados">Borrar&nbsp;&nbsp;<i class="bi bi-trash"></i></button>
+                        <button type="button" class="btn btn-danger" [disabled]="botonesDeshabilitados" (click)="borrarCliente(cliente.id)">Borrar&nbsp;&nbsp;<i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             }

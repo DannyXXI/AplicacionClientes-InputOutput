@@ -54,4 +54,20 @@ export class ListadoClientesComponent {
     this.botonesDeshabilitados = e;
     this.clienteAEditar = undefined;
   }
+
+  // metodo para eliminar un cliente de la lista de clientes
+  public borrarCliente(id:number){
+
+    let clienteABorrar = this.listaClientes.find( cliente => cliente.id == id); // buscamos el cliente con el id
+
+    if(clienteABorrar != undefined){
+      // mostramos un cuadro de dialogo con dos opciones por si se pulsa accidentalmente
+      if ( confirm("¿Desea eliminiar el cliente " + clienteABorrar.nombre + " con CIF " + clienteABorrar.cif + "?") ){
+
+        let nuevalistaClientes = this.listaClientes.filter( cliente => cliente.id !== clienteABorrar.id); // genero una nueva lista de clientes obviando el cliente a eliminar
+
+        this.listaClientes = nuevalistaClientes; // le asignamos la nueva lista a la lista de clientes
+      }
+    }
+  }
 }

@@ -82,6 +82,7 @@ export class FormularioClienteComponent {
     }
   }
 
+  // metodo para el boton de cancelar la modificacion de los datos de un cliente
   public cancelarEdicion():void{
     this.clienteActualizar = undefined;
     this.formulario.setValue({id:-1, nombre: "", cif: "", direccion: "", grupo: ""});
