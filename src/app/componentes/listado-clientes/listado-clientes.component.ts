@@ -32,6 +32,11 @@ export class ListadoClientesComponent {
   public editarCliente(id:number){
     this.clienteAEditar = this.listaClientes.find( cliente => cliente.id == id); // buscamos el cliente con el id
     this.botonesDeshabilitados=true;
-    console.log(this.clienteAEditar);
+  }
+
+  // metodo para el boton de cancelar del formulario de edicion
+  public controlBotones(e:boolean){
+    this.botonesDeshabilitados = e;
+    this.clienteAEditar = undefined;
   }
 }

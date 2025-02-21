@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Cliente } from '../../modelos/Cliente';
 
@@ -24,7 +24,11 @@ export class FormularioClienteComponent {
 
   @Output() mandarCliente:EventEmitter<Cliente> = new EventEmitter<Cliente>;  // evento emisor para mandar el cliente al listado (padre)
 
-  @Input() public clienteActualizar:Cliente | undefined = undefined;
+  @Input() public clienteActualizar:Cliente | undefined = undefined; // varaible que recibe del listado (padre) los datos de un cliente
+
+  public controlBotones:boolean;  // variable para controlar la habilitacion de los botones
+
+  @Output() botonesLista:EventEmitter<boolean> = new EventEmitter<boolean>;  // evento emisor para mandar el boolean al listado (padre)
 
   // metodo constructor
   constructor() {
@@ -39,6 +43,8 @@ export class FormularioClienteComponent {
     this.cliente = null;
 
     this.contadorID = 1;
+
+    this.controlBotones = false;
   }
 
   // metodo para enviar los datos del cliente
@@ -56,5 +62,25 @@ export class FormularioClienteComponent {
       this.cliente=null; // restablecemos la variable cliente como null
       this.formulario.setValue({id:-1, nombre: "", cif: "", direccion: "", grupo: ""}); // reiniciamos los valores del formulario (con reset da error con el trim)
     }
+  }
+
+  // metodo que modifica el formulario cuando se ha recibido la informacion del cliente
+  ngOnChanges(cambios:SimpleChanges){
+    if( cambios["clienteActualizar"] && this.clienteActualizar != undefined ){
+      this.formulario.setValue({
+        id: cambios["clienteActualizar"].currentValue.id, 
+        nombre: cambios["clienteActualizar"].currentValue.nombre, 
+        cif: cambios["clienteActualizar"].currentValue.cif, 
+        direccion: cambios["clienteActualizar"].currentValue.direccion, 
+        grupo: cambios["clienteActualizar"].currentValue.grupo
+      });
+    }
+  }
+
+  public cancelarEdicion():void{
+    this.clienteActualizar = undefined;
+    this.formulario.setValue({id:-1, nombre: "", cif: "", direccion: "", grupo: ""});
+    this.controlBotones = false;
+    this.botonesLista.emit(this.controlBotones);
   }
 }

@@ -36,7 +36,7 @@
     @if(clienteActualizar != undefined){
         <button type="submit" class="btn btn-warning">Guardar&nbsp;&nbsp;<i class="bi bi-floppy"></i></button>
         &nbsp;&nbsp;
-        <button type="button" class="btn btn-danger">Cancelar&nbsp;&nbsp;<i class="bi bi-x-circle"></i></button>
+        <button type="button" class="btn btn-danger" (click)="cancelarEdicion()">Cancelar&nbsp;&nbsp;<i class="bi bi-x-circle"></i></button>
     }
     @else{
         <button type="submit" class="btn btn-primary">Añadir&nbsp;&nbsp;<i class="bi bi-plus-circle"></i></button>
