@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Cliente } from '../../modelos/Cliente';
 
@@ -23,6 +23,8 @@ export class FormularioClienteComponent {
   public contadorID:number;  // variable que asignara cada ID al cliente
 
   @Output() mandarCliente:EventEmitter<Cliente> = new EventEmitter<Cliente>;  // evento emisor para mandar el cliente al listado (padre)
+
+  @Input() public clienteActualizar:Cliente | undefined = undefined;
 
   // metodo constructor
   constructor() {

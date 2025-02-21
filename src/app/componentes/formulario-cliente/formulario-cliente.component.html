@@ -1,5 +1,9 @@
-<h2 class="fs-1 fw-bold text-uppercase">Alta del cliente</h2>
-
+@if(clienteActualizar != undefined){
+    <h2 class="fs-1 fw-bold text-uppercase">Editar datos del cliente</h2>
+}
+@else{
+    <h2 class="fs-1 fw-bold text-uppercase">Alta del cliente</h2>
+}
 <form [formGroup]="formulario" (submit)="enviarFormulario($event)">
     <div class="input-group mb-3">
         <label class="input-group-text" for="nombre">Nombre</label>
@@ -29,5 +33,12 @@
 
     <input type="hidden" id="idCliente" formControlName="id"/>
 
-    <button type="submit" class="btn btn-primary">Añadir&nbsp;&nbsp;<i class="bi bi-plus-circle"></i></button>
+    @if(clienteActualizar != undefined){
+        <button type="submit" class="btn btn-warning">Guardar&nbsp;&nbsp;<i class="bi bi-floppy"></i></button>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-danger">Cancelar&nbsp;&nbsp;<i class="bi bi-x-circle"></i></button>
+    }
+    @else{
+        <button type="submit" class="btn btn-primary">Añadir&nbsp;&nbsp;<i class="bi bi-plus-circle"></i></button>
+    }
 </form>
