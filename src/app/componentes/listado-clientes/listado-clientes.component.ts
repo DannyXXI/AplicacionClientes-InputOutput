@@ -60,7 +60,7 @@ export class ListadoClientesComponent {
 
     let clienteABorrar = this.listaClientes.find( cliente => cliente.id == id); // buscamos el cliente con el id
 
-    if(clienteABorrar != undefined){
+    if(clienteABorrar){
       // mostramos un cuadro de dialogo con dos opciones por si se pulsa accidentalmente
       if ( confirm("¿Desea eliminiar el cliente " + clienteABorrar.nombre + " con CIF " + clienteABorrar.cif + "?") ){
 
